@@ -112,6 +112,7 @@ h6 {
   color: var(--primaryColor);
 }
 .nav-links {
+  /* height and overflow make the navbar button to work*/
   height: 0;
   overflow: hidden;
   transition: var(--mainTransition);
