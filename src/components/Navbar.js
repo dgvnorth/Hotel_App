@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
     state = {
-        isOpen: false
+        isOpen: false,
+        user: {
+            name: 'hola'
+        }
     }
 
     handleToggle = () => {
@@ -14,26 +17,50 @@ export default class Navbar extends Component {
 
     render() {
         return (
-            <nav className="navbar">
-                <div className="nav-center">
-                    <div className="nav-header">
-                        {/* <Link to="/">
+            <>
+                <nav className="navbar">
+                    <div className="nav-center">
+                        <div className="nav-header">
+                            {/* <Link to="/">
                             <img src={logo} alt="Mila's Hotel" />
                         </Link> */}
-                        <button type="button" className="nav-btn" onClick={this.handleToggle}>
-                            <FaAlignRight className="nav-icon" />
-                        </button>
+                            <button type="button" className="nav-btn" onClick={this.handleToggle}>
+                                <FaAlignRight className="nav-icon" />
+                            </button>
+                        </div>
+                        <ul className={this.state.isOpen ? "nav-links show-nav" : "nav-links"}>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/rooms">Rooms</Link>
+                            </li>
+                            {!this.state.user &&
+                                <>
+                                    <li>
+                                        <Link to="/login">Login</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/register">Register</Link>
+                                    </li>
+                                </>
+                            }
+                            {this.state.user &&
+                                <React.Fragment>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/profile">{this.state.user.name}</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/logout">Logout</Link>
+                                    </li>
+                                </React.Fragment>}
+
+                        </ul>
                     </div>
-                    <ul className={this.state.isOpen ? "nav-links show-nav" : "nav-links"}>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/rooms">Rooms</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                </nav>
+                <nav>
+                </nav>
+            </>
         )
     }
 }
